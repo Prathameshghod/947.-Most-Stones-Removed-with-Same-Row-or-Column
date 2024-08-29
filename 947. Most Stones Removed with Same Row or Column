@@ -1,0 +1,28 @@
+***************************** 264. Ugly Number II  ****************************************************************************************
+
+# Python Code 
+class Solution:
+        
+    def dfs(self, stones, index, visited):
+        visited[index] = True
+        
+        row = stones[index][0]
+        col = stones[index][1]
+        
+        for i in range(len(stones)):
+            if not visited[i] and ((stones[i][0] == row) or (stones[i][1] == col)):
+                self.dfs(stones,i,visited)
+    
+    def removeStones(self, stones: List[List[int]]) -> int:
+        n = len(stones)
+        
+        visited = [False]*n
+        
+        count = 0 
+        
+        for i in range(n):
+            if not visited[i]:
+                self.dfs(stones,i,visited)
+                count +=1 
+            
+        return n - count
